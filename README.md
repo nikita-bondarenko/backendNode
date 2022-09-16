@@ -1,13 +1,17 @@
 
-
 ## Installation
+
+- Clone repository
+```bash
+clone https://github.com/nikita-bondarenko/backendNode.git
+```
 
 - Install dependencies
 ```bash
 npm install
 ```
 
-- Create PostgreSQL in docker by docker-compose ( port: 5433)
+- Create PostgreSQL-data-base in docker by docker-compose ( port: 5433)
 
 ```bash
 docker-compose up -d
