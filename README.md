@@ -1,9 +1,9 @@
 
 ## Installation
 
-- Clone repository
+- Clone git repository
 ```bash
-clone https://github.com/nikita-bondarenko/backendNode.git
+git clone https://github.com/nikita-bondarenko/backendNode.git
 ```
 
 - Install dependencies
