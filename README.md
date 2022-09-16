@@ -6,6 +6,12 @@
 git clone https://github.com/nikita-bondarenko/backendNode.git
 ```
 
+- Go to the folder
+
+```bash
+cd backendNode/
+```
+
 - Install dependencies
 ```bash
 npm install
