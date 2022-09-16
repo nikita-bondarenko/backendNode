@@ -16,7 +16,13 @@ app.use("/", auth)
 app.use("/tag", tag)
 app.use("/user", user)
 
-export const getUserIdByToken = async (req, res, tokenType = "Bearer") => {
+export const extractToken = (req) => {
+  const { authorization } = req.headers
+  const token = authorization.trim().split(' ')[1]
+  return token
+}
+
+export const getUserIdByToken = async (req, tokenType = "Bearer") => {
   try {
     const { authorization } = req.headers
     if (!authorization) {
@@ -45,6 +51,21 @@ export const getUserIdByToken = async (req, res, tokenType = "Bearer") => {
 
 }
 
-app.listen(3000, () => {
-  console.log('Listenning at http://localhost:3000')
+const deleteExpiredUserTags = async () => {
+  const sessions = await prisma.userTag.findMany()
+  sessions.forEach(async item => {
+      const token: any = item.token
+      if (Date.now() - Number(item.touchedAt) > 1000 * 60 * 30) {
+          await prisma.userTag.delete({
+              where: { token }
+          })
+      }
+  })
+}
+
+
+setTimeout(() => deleteExpiredUserTags(), 1000 * 60)
+
+app.listen(4000, () => {
+  console.log('Listenning at http://localhost:4000')
 })

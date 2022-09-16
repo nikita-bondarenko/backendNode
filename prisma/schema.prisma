@@ -16,18 +16,19 @@ model User {
 
 model Tag {
   id        Int    @id @default(autoincrement())
-  user      User   @relation(fields: [creator], references: [uid])
-  creator   String @db.Uuid
-  name      String @db.VarChar(40)
+  creator      User?   @relation(fields: [creatorId], references: [uid])
+  creatorId   String? @db.Uuid
+  name      String @db.VarChar(40) @unique
   sortOrder Int    @default(0)
 }
 
 model UserTag {
-  token        String? @unique
+  token        String @unique
   refreshToken String  @unique
   expire       Int     @default(1800)
   User         User?   @relation(fields: [userUid], references: [uid])
   userUid      String? @db.Uuid
+  touchedAt String
 }
 
 datasource db {
